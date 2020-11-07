@@ -8,6 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 	<link rel="icon" type="text/css" href="log.png">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<style type="text/css">
 
 	</style>
@@ -88,12 +89,16 @@
 						<div>
 							<p><?php echo $stroka["text"]; ?></p>
 						</div>						
-						<button class="btn btn-success edit">Редактировать</button>
+						<button class="btn btn-success edit"><i class="fa fa-edit mr-2"></i>Редактировать</button>
 						<form method="GET" action="update.php" class="form mt-2" style="display: none">
-							<input type="" name="id" class="form-control" value="<?php echo $stroka["id"] ?>">
-							<input type="" name="text" placeholder="текст" class="form-control mt-2" value="<?php echo $stroka["text"] ?>">
+							<input type="" name="id" class="form-control" value="<?php echo $stroka["id"] ?>" style="display: none">
+							<input type="" name="text" placeholder="текст" class="form-control" value="<?php echo $stroka["text"] ?>">
 							<input type="" name="img" placeholder="картинка" class="form-control mt-2" value="<?php echo $stroka["img"] ?>">
-							<button class="btn btn-danger mt-2">Сохранить</button>
+							<button class="btn btn-outline-success mt-2">Сохранить</button>
+						</form>
+						<form method="GET" action="delete.php" class="delete mt-2" style="display: none">
+							<input type="" name="id" class="form-control" value="<?php echo $stroka["id"] ?>" style="display: none">
+							<button class="btn btn-outline-danger btn-delete">Удалить</button>
 						</form>
 						<div>
 							<p>5 недель назад</p>
@@ -191,16 +196,27 @@
 						</div>
 					</div>
 				</div>
+				<button class="btn btn-dark form-control"><a href="admin.php">Новый пост</a></button>
 			</div>
 		</div>
 	</div>
 	<script type="text/javascript">
 		let edit = document.querySelectorAll('.edit');
 		let form = document.querySelectorAll('.form');
-		for(let i=0; i<3; i++){
+		let del = document.querySelectorAll('.delete');
+		for(let i=0; i<6; i++){
 			edit[i].onclick = function() {
 				form[i].style.display = 'block';
 				edit[i].style.display = 'none';
+				del[i].style.display = 'block';
+			}
+		}
+		let delbtn = document.querySelectorAll('.btn-delete');
+		let post = document.querySelectorAll('.post');
+
+		for(let i=0; i<6; i++){
+			delbtn[i].onclick = function() {
+				post[i].style.display = 'none';
 			}
 		}
 	</script>
